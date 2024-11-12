@@ -11,8 +11,21 @@ FROM ubuntu:22.04
     # - cmake
     # - git -> required to retrieve the gtest from git repository
 RUN apt-get update && \
-    apt-get install -y build-essential cmake gcc g++ git && \
-    apt-get clean
+    apt-get install -y build-essential cmake tar gcc g++ git ca-certificates && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Set up Google Test using FetchContent
+WORKDIR /usr/src/gtest
+
+# Clone Google Test repository and build
+RUN git clone --branch release-1.11.0 https://github.com/google/googletest.git .  && \
+    cmake -B build  && \
+    cmake --build build  && \
+    cp -r build/lib/* /usr/local/lib  && \
+    cp -r googletest/include/gtest /usr/local/include
+
+# Clean up unnecessary files after build to save space
+RUN rm -rf /usr/src/gtest
 
 # Set environment variables for C++20
 ENV CC=gcc
