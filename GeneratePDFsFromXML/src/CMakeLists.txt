@@ -6,10 +6,14 @@ project(generate_pdf_from_xml)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Enable testing
+enable_testing()
+
+# Find GoogleTest package
+find_package(GTest REQUIRED)
+
 # Add subdirectories for the main components and tests
 add_subdirectory(parseXmlLib)          # Main library
 add_subdirectory(parseXmlExe)          # Main executable
-#add_subdirectory(parseXmlLibTests)    # Unit tests
+add_subdirectory(parseXmlLibTests)     # Unit tests
 
-# Enable testing
-enable_testing()

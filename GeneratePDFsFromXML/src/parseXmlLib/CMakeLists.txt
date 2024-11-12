@@ -1,9 +1,13 @@
 
 # Define the library target
-add_library(parseXmlLib SHARED parseXmlLib.cpp)
 
-# Specify include directories
-target_include_directories(parseXmlLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+#If shared creates a shared lib .so
+#If nothing creates a static lib .a (default)
 
-# You can set the C++ standard if needed
-set_target_properties(parseXmlLib PROPERTIES CXX_STANDARD 20)
+add_library(parseXmlLib SHARED
+    parseXmlLib.cpp    # Add more library source files as needed
+)
+
+target_include_directories(parseXmlLib
+    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
+)
