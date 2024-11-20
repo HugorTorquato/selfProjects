@@ -39,5 +39,10 @@ COPY ./src /src
 #RUN cmake -Bbuild -H. && \
 #    cmake --build build
 
-# Default command to run your application
-CMD [ "tail", "-f", "/dev/null" ]
+RUN echo "\n#Definer Aliases:" >> ~/.bashrc
+RUN echo "alias LBuild='cd /src && cmake -B ./out/build && cmake --build ./out/build'" >> ~/.bashrc
+RUN echo "alias LRun_Gtest='cd /src/out/build/parseXmlLibTests && ctest && cd -'" >> ~/.bashrc
+RUN echo "alias SimpleXML_test='./out/build/parseXmlExe/parseXmlExe resources/SimpleXML.xml'" >> ~/.bashrc
+
+# Set the ENTRYPOINT to source the alias script
+CMD [ "tail", "-f", "/dev/null"]
