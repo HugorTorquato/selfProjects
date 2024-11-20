@@ -5,6 +5,12 @@ project(generate_pdf_from_xml)
 # Set the C++ standard to 20
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+include(GNUInstallDirs)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR})
 
 # Find Qt libraries
 find_package(Qt5 REQUIRED COMPONENTS Core)
@@ -24,8 +30,3 @@ add_subdirectory(parseXmlLib)          # Main library
 add_subdirectory(parseXmlExe)          # Main executable
 add_subdirectory(parseXmlLibTests)     # Unit tests
 
-# mingw_toolchain.cmake
-set(CMAKE_SYSTEM_NAME Windows)
-set(CMAKE_C_COMPILER x86_64-w64-mingw32-gcc)
-set(CMAKE_CXX_COMPILER x86_64-w64-mingw32-g++)
-set(CMAKE_RC_COMPILER x86_64-w64-mingw32-windres)
