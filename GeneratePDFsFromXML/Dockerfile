@@ -11,8 +11,9 @@ FROM ubuntu:22.04
     # - cmake
     # - git -> required to retrieve the gtest from git repository
 RUN apt-get update && \
-    apt-get install -y build-essential cmake tar gcc g++ git ca-certificates && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+    apt-get install -y build-essential cmake tar gcc g++ git ca-certificates qtbase5-dev mingw-w64 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Set up Google Test using FetchContent
 WORKDIR /usr/src/gtest
@@ -38,5 +39,10 @@ COPY ./src /src
 #RUN cmake -Bbuild -H. && \
 #    cmake --build build
 
-# Default command to run your application
-CMD [ "tail", "-f", "/dev/null" ]
+RUN echo "\n#Definer Aliases:" >> ~/.bashrc
+RUN echo "alias LBuild='cd /src && cmake -B ./out/build && cmake --build ./out/build'" >> ~/.bashrc
+RUN echo "alias LRun_Gtest='cd /src/out/build/parseXmlLibTests && ctest && cd -'" >> ~/.bashrc
+RUN echo "alias SimpleXML_test='./out/build/parseXmlExe/parseXmlExe resources/SimpleXML.xml'" >> ~/.bashrc
+
+# Set the ENTRYPOINT to source the alias script
+CMD [ "tail", "-f", "/dev/null"]

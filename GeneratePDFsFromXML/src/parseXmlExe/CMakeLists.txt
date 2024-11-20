@@ -2,4 +2,4 @@
 add_executable(parseXmlExe main.cpp)
 
 # Link the executable with the readXmlLib library
-target_link_libraries(parseXmlExe PRIVATE parseXmlLib)
+target_link_libraries(parseXmlExe parseXmlLib Qt5::Core)
