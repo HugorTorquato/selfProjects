@@ -11,8 +11,9 @@ FROM ubuntu:22.04
     # - cmake
     # - git -> required to retrieve the gtest from git repository
 RUN apt-get update && \
-    apt-get install -y build-essential cmake tar gcc g++ git ca-certificates && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+    apt-get install -y build-essential cmake tar gcc g++ git ca-certificates qtbase5-dev mingw-w64 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Set up Google Test using FetchContent
 WORKDIR /usr/src/gtest
