@@ -2,13 +2,15 @@
 
 #include "../parseXmlLib/parseXmlLib.h"
 
-int main() {
-    // Your code here
+int main(int argc, char *argv[]) {
 
-    testLib test;
 
-    test.id = 5;
 
-    std::cout << "Hello, world! :" <<  test.getId() << std::endl;
+    std::cout << "argc :" <<  argc << std::endl;
+
+    for(int i=0; i<argc; i++){
+        std::cout << "argv[" << i << "] : " << argv[i]  << std::endl;
+    }
+
     return 0;
 }
